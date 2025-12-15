@@ -279,7 +279,7 @@ QR Code qr0
         Effect Priority  : 0
         Effect Time      : 300
         Logo overlay     : no
-        Text             : https://github.com/Blackymas/NSPanel_HA_Blueprint/blob/main/docs/nspanel_blank.md#what-to-do-after-installing-nspanel_blanktft
+        Text             : https://github.com/Chester929/NSPanel_HA_Blueprint/blob/main/docs/nspanel_blank.md#what-to-do-after-installing-nspanel_blanktft
         Max. Text Size   : 150
     
     Events

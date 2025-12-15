@@ -3,7 +3,7 @@ substitutions:
   device_name: nspanel
   wifi_ssid: "nspanel"
   wifi_password: "NSPanel_HA_Blueprint"
-  nextion_update_url: "https://github.com/Blackymas/NSPanel_HA_Blueprint/dummy"
+  nextion_update_url: "https://github.com/Chester929/NSPanel_HA_Blueprint/dummy"
 
 logger:
   level: VERY_VERBOSE
