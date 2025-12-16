@@ -48,11 +48,18 @@ api:
                                       page_names[current_page_id], page.c_str());
               return;
             }
+            
+            int b_pic;
+            if (page.c_str() == "buttonpage01") {
+              b_pic = state ? 51 : 50
+            } else {
+              b_pic = state ? 47 : 46
+            }
 
-            disp1->set_component_picc((id + "pic").c_str(), state ? 47 : 46);
-            disp1->set_component_picc((id + "bri").c_str(), state ? 47 : 46);
-            disp1->set_component_picc((id + "text").c_str(), state ? 47 : 46);
-            disp1->set_component_picc((id + "icon").c_str(), state ? 47 : 46);
+            disp1->set_component_picc((id + "pic").c_str(), b_pic);
+            disp1->set_component_picc((id + "bri").c_str(), b_pic);
+            disp1->set_component_picc((id + "text").c_str(), b_pic);
+            disp1->set_component_picc((id + "icon").c_str(), b_pic);
             disp1->set_component_font((id + "icon").c_str(), icon_font);
             disp1->set_component_foreground_color((id + "bri").c_str(), state ? ${COLOR_BLUE_INDIGO} : ${COLOR_WHITE});
             disp1->set_component_foreground_color((id + "text").c_str(), state ? ${COLOR_BLUE_INDIGO} : 65535);
