@@ -10097,6 +10097,20 @@ action:
                               id: cover_value
                               txt: '{{ (state_attr(cover_entity, "current_position") | int ) | round(0) }} %'
                             continue_on_error: true
+                          - *delay_default
+                          - action: 'esphome.{{ nspanel_name }}_component_val'
+                            data:
+                              page: cover
+                              id: covertslider
+                              val: '{{ (state_attr(cover_entity, "current_tilt_position") | int ) | round(0) }}'
+                            continue_on_error: true
+                          - *delay_default
+                          - action: 'esphome.{{ nspanel_name }}_component_text'
+                            data:
+                              page: cover
+                              id: cover_t_val
+                              txt: '{{ (state_attr(cover_entity, "current_tilt_position") | int ) | round(0) }} %'
+                            continue_on_error: true
 
                           ##### COVER Battery ICON Yes / NO #####
                           - variables:
