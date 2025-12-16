@@ -9852,7 +9852,7 @@ action:
                                           {% endif %}
                                         icon_clr: > # Icon color
                                           {% if entity_domain == "cover" %}
-                                            {{ nextion.color.blue }}
+                                            {{ rgb(255, 0, 0) }}
                                           {% else %}
                                             {{ entity.icon_color }}
                                           {% endif %}
