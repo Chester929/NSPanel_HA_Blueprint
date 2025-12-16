@@ -51,7 +51,7 @@ api:
             
             uint8_t b_pic;
             if (current_page_id == 12) {
-              b_pic = state ? 50 : 51;
+              b_pic = state ? 51 : 52;
             } else {
               b_pic = state ? 47 : 46;
             }
