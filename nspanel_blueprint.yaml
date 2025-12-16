@@ -9831,6 +9831,7 @@ action:
                                         btn_state: >  # Button state (on = true or off = false)
                                           {{
                                             (entity_state in enum.states.on and entity_domain not in ["automation"])
+                                            or (entity_domain == "cover")
                                             or (entity_domain == "climate" and entity_state != "off")
                                             or (entity_domain in ["button", "input_button", "scene", "automation", "remote"] and trigger.id is match "current_state_entity")
                                           }}
