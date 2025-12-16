@@ -9872,9 +9872,9 @@ action:
                                           data:
                                             page: '{{ repeat.item.page }}'
                                             id: '{{ repeat.item.component }}'
-                                            state: false
+                                            state: true
                                             icon: '{{ entity.icon }}'
-                                            icon_color: '{{ nextion.color.grey_light }}'
+                                            icon_color: '{{ nextion.color.blue }}'
                                             icon_font: '{{ button_pages_icon_size if is_number(button_pages_icon_size) else 8 }}'
                                             bri: '{{ btn_bri_txt }}'
                                             label: '{{ entity.name }}'
