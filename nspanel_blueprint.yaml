@@ -4838,6 +4838,7 @@ action:
           grey_super_light: [200, 204, 200]
           grey_white: [225, 225, 225]
           red: [248, 0, 0]
+          purple: [146, 107, 199]
           white: [255, 255, 255]
           yellow: [248, 248, 0]
           #### Colors from HA Style:
@@ -9852,7 +9853,7 @@ action:
                                           {% endif %}
                                         icon_clr: > # Icon color
                                           {% if entity_domain == "cover" %}
-                                            {{ nextion.color.blue_violet }}
+                                            {{ nextion.color.purple }}
                                           {% else %}
                                             {{ entity.icon_color }}
                                           {% endif %}
