@@ -9843,12 +9843,18 @@ action:
                                             {{ (entity_brightness_index*100) | round(0) }}%
                                           {% elif entity_domain == "fan" and entity_state == "on" and state_attr(entity_id, "percentage") | int(0) > 0 %}
                                             {{ state_attr(entity_id, "percentage") | round(0, default=0) }}%
-                                          {% elif entity_domain == "cover" and entity_state in ["open", "opening", "closing"] and is_number(state_attr(entity_id, "current_position")) %}
-                                            {{ (state_attr(entity_id, "current_position") | int(100)) | round(0) }}%
+                                          {% elif entity_domain == "cover" and is_number(state_attr(entity_id, "current_tilt_position")) %}
+                                            {{ (state_attr(entity_id, "current_tilt_position") | int(100)) | round(0) }}%
                                           {% elif entity_domain == "climate" and is_number(state_attr(entity_id, 'current_temperature')) %}
                                             {% set current_temperature = state_attr(entity_id, 'current_temperature') | float %}
                                             {{ current_temperature | round(0 if current_temperature >= 100 or temperature_units in ["F", "f", "°F", "°f", "K", "k"] else 1) }}{{ temperature_units}}
                                           {% else %} 0
+                                          {% endif %}
+                                        icon_clr: > # Icon color
+                                          {% if entity_domain == "cover" %}
+                                            {{ nextion.color.blue }}
+                                          {% else %}
+                                            {{ entity.icon_color }}
                                           {% endif %}
                                     - *delay_default
                                     - action: 'esphome.{{ nspanel_name }}_button'
@@ -9857,7 +9863,7 @@ action:
                                         id: '{{ repeat.item.component }}'
                                         state: '{{ btn_state if btn_state else false }}'
                                         icon: '{{ entity.icon }}'
-                                        icon_color: '{{ nextion.color.grey_light }}'
+                                        icon_color: '{{ icon_clr }}'
                                         icon_font: '{{ button_pages_icon_size if is_number(button_pages_icon_size) else 8 }}'
                                         bri: '{{ btn_bri_txt if btn_bri_txt and btn_bri_txt != "0%" else "" }}'
                                         label: '{{ entity.name }}'
@@ -9872,7 +9878,7 @@ action:
                                           data:
                                             page: '{{ repeat.item.page }}'
                                             id: '{{ repeat.item.component }}'
-                                            state: true
+                                            state: false
                                             icon: '{{ entity.icon }}'
                                             icon_color: '{{ nextion.color.grey_light }}'
                                             icon_font: '{{ button_pages_icon_size if is_number(button_pages_icon_size) else 8 }}'
