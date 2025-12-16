@@ -50,7 +50,7 @@ api:
             }
             
             uint8_t b_pic;
-            ESP_LOGI("Current page od: '%i' page: '%s'", (int)current_page_id, page.c_str());
+            ESP_LOGI("Current page od: '%u' page: '%s'", (unsigned int)current_page_id, page.c_str());
             if (current_page_id == 12) {
               b_pic = state ? 51 : 50;
             } else {
