@@ -9857,7 +9857,7 @@ action:
                                         id: '{{ repeat.item.component }}'
                                         state: '{{ btn_state if btn_state else false }}'
                                         icon: '{{ entity.icon }}'
-                                        icon_color: '{{ entity.icon_color }}'
+                                        icon_color: '{{ nextion.color.grey_light }}'
                                         icon_font: '{{ button_pages_icon_size if is_number(button_pages_icon_size) else 8 }}'
                                         bri: '{{ btn_bri_txt if btn_bri_txt and btn_bri_txt != "0%" else "" }}'
                                         label: '{{ entity.name }}'
@@ -9874,7 +9874,7 @@ action:
                                             id: '{{ repeat.item.component }}'
                                             state: true
                                             icon: '{{ entity.icon }}'
-                                            icon_color: '{{ nextion.color.blue }}'
+                                            icon_color: '{{ nextion.color.grey_light }}'
                                             icon_font: '{{ button_pages_icon_size if is_number(button_pages_icon_size) else 8 }}'
                                             bri: '{{ btn_bri_txt }}'
                                             label: '{{ entity.name }}'
