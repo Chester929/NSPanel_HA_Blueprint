@@ -51,9 +51,9 @@ api:
             
             int b_pic;
             if (page.c_str() == "buttonpage01") {
-              b_pic = (state ? 51 : 50);
+              b_pic = state ? 51 : 50;
             } else {
-              b_pic = (state ? 47 : 46);
+              b_pic = state ? 47 : 46;
             }
 
             disp1->set_component_picc((id + "pic").c_str(), b_pic);
