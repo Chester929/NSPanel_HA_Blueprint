@@ -182,7 +182,7 @@ Slider coverslider
         Dragging               : 0
         Send Component ID      : on press and release
         Opacity                : 127
-        x coordinate           : 18
+        x coordinate           : 183
         y coordinate           : 67
         Width                  : 83
         Height                 : 233
@@ -198,7 +198,7 @@ Slider coverslider
         Position               : 0
         Upper range limit      : 100
         Lower range limit      : 0
-    
+
     Events
         Touch Release Event
             covx coverslider.val,va1.txt,0,0
@@ -210,7 +210,7 @@ Slider coverslider
             prints coversetting.txt,0
             printh 00
             printh FF FF FF
-        
+
         Touch Move Event
             covx coverslider.val,va1.txt,0,0
             cover_value.txt=va1.txt+"%"
@@ -242,13 +242,87 @@ Button cover_open
         Word wrap                           : disabled
         Horizontal Spacing                  : 0
         Vertical Spacing                    : 0
-    
+
     Events
         Touch Press Event
             printh 92
             prints "localevent",0
             printh 00
-            prints "cover,tilt_position,5",0
+            prints "cover,open_cover",0
+            printh 00
+            printh FF FF FF
+
+Button cover_close
+    Attributes
+        ID                                  : 5
+        Scope                               : local
+        Dragging                            : 0
+        Send Component ID                   : on press and release
+        Opacity                             : 127
+        x coordinate                        : 295
+        y coordinate                        : 245
+        Width                               : 65
+        Height                              : 55
+        Effect                              : load
+        Effect Priority                     : 0
+        Effect Time                         : 300
+        Fill                                : crop image
+        Font ID                             : 10
+        Cropped Back. Picture ID (Unpressed): 0
+        Back. Picture ID (Pressed)          : 19
+        Cropped Back. Picture ID (Pressed)  : 0
+        Horizontal Alignment                : center
+        Vertical Alignment                  : center
+        State                               : unpressed
+        Text                                : \xef\x84\x9b
+        Max. Text Size                      : 3
+        Word wrap                           : disabled
+        Horizontal Spacing                  : 0
+        Vertical Spacing                    : 0
+
+    Events
+        Touch Press Event
+            printh 92
+            prints "localevent",0
+            printh 00
+            prints "cover,close_cover",0
+            printh 00
+            printh FF FF FF
+
+Button cover_stop
+    Attributes
+        ID                                  : 8
+        Scope                               : local
+        Dragging                            : 0
+        Send Component ID                   : on press and release
+        Opacity                             : 127
+        x coordinate                        : 98
+        y coordinate                        : 245
+        Width                               : 65
+        Height                              : 55
+        Effect                              : load
+        Effect Priority                     : 0
+        Effect Time                         : 300
+        Fill                                : crop image
+        Font ID                             : 10
+        Cropped Back. Picture ID (Unpressed): 0
+        Back. Picture ID (Pressed)          : 22
+        Cropped Back. Picture ID (Pressed)  : 0
+        Horizontal Alignment                : center
+        Vertical Alignment                  : center
+        State                               : unpressed
+        Text                                : \xee\x99\xa6
+        Max. Text Size                      : 3
+        Word wrap                           : disabled
+        Horizontal Spacing                  : 0
+        Vertical Spacing                    : 0
+
+    Events
+        Touch Press Event
+            printh 92
+            prints "localevent",0
+            printh 00
+            prints "cover,stop_cover",0
             printh 00
             printh FF FF FF
 
