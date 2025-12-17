@@ -48,7 +48,7 @@ api:
                                       page_names[current_page_id], page.c_str());
               return;
             }
-            
+
             uint8_t b_pic;
             if (current_page_id == 12) {
               b_pic = state ? 51 : 52;
