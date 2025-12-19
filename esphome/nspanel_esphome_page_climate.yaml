@@ -25,6 +25,7 @@ api:
         total_steps: int         # Total adjustment steps available, derived from the device's temperature range and step size.
         temp_offset: int         # Calibration offset applied to the temperature reading (multiplied by 10 for precision).
         climate_icon: string     # Icon codepoint representing the current climate status, chosen from HASwitchPlate Material Design Icons.
+        mclimate_icon: string    # Icon codepoint representing the main climate status, chosen from HASwitchPlate Material Design Icons.
         embedded_climate: bool   # Indicates if climate control is integrated into the interface.
         entity: string           # Entity ID of the climate device, allowing for direct control and status updates.
       then:
@@ -39,6 +40,7 @@ api:
             ESP_LOGV("${TAG_API}", "  total_steps: %i", total_steps);
             ESP_LOGV("${TAG_API}", "  temp_offset: %i", temp_offset);
             ESP_LOGV("${TAG_API}", "  climate_icon: %s", climate_icon.c_str());
+            ESP_LOGV("${TAG_API}", "  mclimate_icon: %s", mclimate_icon.c_str());
             ESP_LOGV("${TAG_API}", "  embedded_climate: %s", YESNO(embedded_climate));
             ESP_LOGV("${TAG_API}", "  entity: %s", entity.c_str());
 
@@ -55,6 +57,7 @@ api:
             set_climate_total_steps = total_steps;
             set_climate_temp_offset = temp_offset;
             set_climate_climate_icon = climate_icon;
+            set_climate_mclimate_icon = mclimate_icon;
             set_climate_embedded_climate = embedded_climate;
 
         - script.execute: set_climate
@@ -177,6 +180,7 @@ script:
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_total_steps: %u", set_climate_total_steps);
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_temp_offset: %i", set_climate_temp_offset);
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_climate_icon: %s", set_climate_climate_icon.c_str());
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_mclimate_icon: %s", set_climate_mclimate_icon.c_str());
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_embedded_climate: %s", YESNO(set_climate_embedded_climate));
 
           if (current_page_id != ${PAGE_CLIMATE_ID}) {
