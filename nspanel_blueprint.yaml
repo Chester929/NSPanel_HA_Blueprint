@@ -10557,18 +10557,28 @@ action:
                                   max_temp: '{{ (max_temp_raw / temp_step) | round * temp_step }}'
                                   total_steps: '{{ ((max_temp-temp_offset)/temp_step) | round(0) | int }}'
                                   climate_state: '{{ states(climate_entity) | default("unavailable") if climate_entity is string else "unavailable" }}'
+                                  mclimate_state: '{{ states("climate.circa_2") default("unavailable") }}'
                                   hvac_action: '{{ state_attr(climate_entity, "hvac_action") | default("") }}'
+                                  mhvac_action: '{{ state_attr("climate.circa_2", "hvac_action") | default("") }}'
                                   hvac_modes: '{{ state_attr(climate_entity, "hvac_modes") }}'
+                                  mhvac_modes: '{{ state_attr("climate.circa_2", "hvac_modes") }}'
                                   climate_action: '{{ hvac_action if hvac_action and hvac_action not in enum.states.unknown else climate_state }}'
+                                  mclimate_action: '{{ mhvac_action if mhvac_action and mhvac_action not in enum.states.unknown else mclimate_state }}'
                                   climate_icon: >
-                                    {% if "off" in climate_action %}{{ all_icons.blank }}
-                                    {% elif "heat_cool" in climate_action %}{{ all_icons.autorenew }}
-                                    {% elif "heating" in climate_action or "heat" in climate_action %}{{ all_icons["thermometer-lines"] }}
-                                    {% elif "cooling" in climate_action or "cool" in climate_action %}{{ all_icons.snowflake }}
-                                    {% elif "drying" in climate_action or "dry" in climate_action %}{{ all_icons["water-percent"] }}
-                                    {% elif "fan" in climate_action or "fan_only" in climate_action %}{{ all_icons.fan }}
-                                    {% elif "auto" in climate_action %}{{ all_icons["refresh-auto"] }}
-                                    {% elif "idle" in climate_action %}{{ all_icons.thermometer }}
+                                    {% if "off" in climate_action %}
+                                      {{ all_icons.valve_closed }}
+                                    {% else %}
+                                      {{ all_icons.valve_opened }}
+                                    {% endif %}
+                                  mclimate_icon: >
+                                    {% if "off" in mclimate_action %}{{ all_icons.blank }}
+                                    {% elif "heat_cool" in mclimate_action %}{{ all_icons.autorenew }}
+                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}{{ all_icons["thermometer-lines"] }}
+                                    {% elif "cooling" in mclimate_action or "cool" in mclimate_action %}{{ all_icons.snowflake }}
+                                    {% elif "drying" in mclimate_action or "dry" in mclimate_action %}{{ all_icons["water-percent"] }}
+                                    {% elif "fan" in mclimate_action or "fan_only" in mclimate_action %}{{ all_icons.fan }}
+                                    {% elif "auto" in mclimate_action %}{{ all_icons["refresh-auto"] }}
+                                    {% elif "idle" in mclimate_action %}{{ all_icons.thermometer }}
                                     {% else %}{{ all_icons.blank }}
                                     {% endif %}
                               - *delay_default
