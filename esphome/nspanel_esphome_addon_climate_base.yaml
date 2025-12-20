@@ -278,6 +278,7 @@ script:
           set_climate_total_steps = int(round(total_steps));
           set_climate_temp_offset = int(round(display_offset*10));
           set_climate_climate_icon = "";
+          set_climate_mclimate_icon = "";
           set_climate_embedded_climate = true;
           feed_wdt_delay(${DELAY_SHORT});
           if (current_page_id != ${PAGE_CLIMATE_ID}) return;

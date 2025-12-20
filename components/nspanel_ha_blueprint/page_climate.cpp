@@ -15,6 +15,7 @@ namespace nspanel_ha_blueprint {
     uint8_t set_climate_total_steps;
     uint8_t set_climate_temp_offset;
     std::string set_climate_climate_icon;
+    std::string set_climate_mclimate_icon;
     bool set_climate_embedded_climate;
 
 }  // namespace nspanel_ha_blueprint
