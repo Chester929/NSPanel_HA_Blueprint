@@ -10557,7 +10557,7 @@ action:
                                   max_temp: '{{ (max_temp_raw / temp_step) | round * temp_step }}'
                                   total_steps: '{{ ((max_temp-temp_offset)/temp_step) | round(0) | int }}'
                                   climate_state: '{{ states(climate_entity) | default("unavailable") if climate_entity is string else "unavailable" }}'
-                                  mclimate_state: '{{ states("climate.circa_2") default("unavailable") }}'
+                                  mclimate_state: '{{ states("climate.circa_2") | default("unavailable") }}'
                                   hvac_action: '{{ state_attr(climate_entity, "hvac_action") | default("") }}'
                                   mhvac_action: '{{ state_attr("climate.circa_2", "hvac_action") | default("") }}'
                                   hvac_modes: '{{ state_attr(climate_entity, "hvac_modes") }}'
