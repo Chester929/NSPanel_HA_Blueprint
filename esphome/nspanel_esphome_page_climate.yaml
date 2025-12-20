@@ -278,12 +278,10 @@ script:
           }
           feed_wdt_delay(${DELAY_SHORT});
           if (current_page_id != ${PAGE_CLIMATE_ID}) return;
-          
           disp1->set_component_text("target_icon", set_climate_climate_icon.c_str());
           disp1->set_component_text("mtarget_icon", set_climate_mclimate_icon.c_str());
           disp1->show_component("target_icon");
           disp1->show_component("mtarget_icon");
-          
           if (
                 set_climate_target_temp > -999 or       // Target temp enabled
                 set_climate_target_temp_high > -999 or  // Target temp high enabled
