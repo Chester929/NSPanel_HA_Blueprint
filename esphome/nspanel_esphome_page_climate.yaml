@@ -57,7 +57,6 @@ api:
             set_climate_total_steps = total_steps;
             set_climate_temp_offset = temp_offset;
             set_climate_climate_icon = climate_icon;
-            set_climate_mclimate_icon = mclimate_icon;
             set_climate_embedded_climate = embedded_climate;
 
         - script.execute: set_climate
@@ -180,7 +179,6 @@ script:
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_total_steps: %u", set_climate_total_steps);
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_temp_offset: %i", set_climate_temp_offset);
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_climate_icon: %s", set_climate_climate_icon.c_str());
-          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_mclimate_icon: %s", set_climate_mclimate_icon.c_str());
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_embedded_climate: %s", YESNO(set_climate_embedded_climate));
 
           if (current_page_id != ${PAGE_CLIMATE_ID}) {
@@ -279,7 +277,7 @@ script:
           feed_wdt_delay(${DELAY_SHORT});
           if (current_page_id != ${PAGE_CLIMATE_ID}) return;
           disp1->set_component_text("target_icon", set_climate_climate_icon.c_str());
-          disp1->set_component_text("mtarget_icon", set_climate_mclimate_icon.c_str());
+          disp1->set_component_text("mtarget_icon", mclimate_icon.c_str());
           disp1->show_component("target_icon");
           disp1->show_component("mtarget_icon");
           if (

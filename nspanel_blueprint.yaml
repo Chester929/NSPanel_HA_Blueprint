@@ -10593,6 +10593,7 @@ action:
                                   total_steps: '{{ total_steps }}'
                                   temp_offset: '{{ temp_offset }}'
                                   climate_icon: '{{ climate_icon }}'
+                                  mclimate_icon: '{{ mclimate_icon }}'
                                   embedded_climate: '{{ climate_entity == thermostat_embedded }}'
                                   entity: '{{ "embedded_climate" if climate_entity == thermostat_embedded else climate_entity }}'
                                 continue_on_error: true
