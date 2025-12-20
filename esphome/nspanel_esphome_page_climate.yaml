@@ -48,6 +48,8 @@ api:
             if (current_page_id == ${PAGE_CLIMATE_ID})
               detailed_entity->publish_state(entity.c_str());
 
+            std::string set_climate_mclimate_icon;
+
             set_climate_current_temp = current_temp;
             set_climate_supported_features = supported_features;
             set_climate_target_temp = target_temp;
@@ -57,6 +59,7 @@ api:
             set_climate_total_steps = total_steps;
             set_climate_temp_offset = temp_offset;
             set_climate_climate_icon = climate_icon;
+            set_climate_mclimate_icon = mclimate_icon;
             set_climate_embedded_climate = embedded_climate;
 
         - script.execute: set_climate
@@ -277,7 +280,7 @@ script:
           feed_wdt_delay(${DELAY_SHORT});
           if (current_page_id != ${PAGE_CLIMATE_ID}) return;
           disp1->set_component_text("target_icon", set_climate_climate_icon.c_str());
-          disp1->set_component_text("mtarget_icon", mclimate_icon.c_str());
+          disp1->set_component_text("mtarget_icon", set_climate_mclimate_icon.c_str());
           disp1->show_component("target_icon");
           disp1->show_component("mtarget_icon");
           if (
