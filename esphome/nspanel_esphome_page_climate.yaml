@@ -61,10 +61,8 @@ api:
             set_climate_climate_icon = climate_icon;
             set_climate_mclimate_icon = mclimate_icon;
             set_climate_embedded_climate = embedded_climate;
-
-        - script.execute: set_climate
-          data:
-            set_climate_mclimate_icon: set_climate_mclimate_icon
+        - lambda: |-
+            set_climate->execute(set_climate_mclimate_icon.c_str());
 
 display:
   - id: !extend disp1
@@ -172,6 +170,8 @@ script:
 
   - id: set_climate
     mode: restart
+    parameters:
+      set_climate_mclimate_icon: string
     then:
       - lambda: |-
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "Script: set_climate");
