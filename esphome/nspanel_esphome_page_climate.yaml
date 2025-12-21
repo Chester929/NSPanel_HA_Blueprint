@@ -63,6 +63,8 @@ api:
             set_climate_embedded_climate = embedded_climate;
 
         - script.execute: set_climate
+          data:
+            set_climate_mclimate_icon: set_climate_mclimate_icon
 
 display:
   - id: !extend disp1
