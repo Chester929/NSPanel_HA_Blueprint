@@ -40,7 +40,6 @@ api:
             ESP_LOGV("${TAG_API}", "  total_steps: %i", total_steps);
             ESP_LOGV("${TAG_API}", "  temp_offset: %i", temp_offset);
             ESP_LOGV("${TAG_API}", "  climate_icon: %s", climate_icon.c_str());
-            ESP_LOGV("${TAG_API}", "  mclimate_icon: %s", mclimate_icon.c_str());
             ESP_LOGV("${TAG_API}", "  embedded_climate: %s", YESNO(embedded_climate));
             ESP_LOGV("${TAG_API}", "  entity: %s", entity.c_str());
 
