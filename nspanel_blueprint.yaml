@@ -4833,6 +4833,7 @@ action:
       nextion:
         color:
           blue: [0, 128, 248]
+          blue_valve: [34, 148, 242]
           grey_dark: [40, 44, 40]
           grey_light: [128, 128, 128]
           grey_super_light: [200, 204, 200]
@@ -10571,15 +10572,50 @@ action:
                                       {{ all_icons["valve-open"] }}
                                     {% endif %}
                                   mclimate_icon: >
-                                    {% if "off" in mclimate_action %}{{ all_icons.blank }}
-                                    {% elif "heat_cool" in mclimate_action %}{{ all_icons.autorenew }}
-                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}{{ all_icons["thermometer-lines"] }}
-                                    {% elif "cooling" in mclimate_action or "cool" in mclimate_action %}{{ all_icons.snowflake }}
-                                    {% elif "drying" in mclimate_action or "dry" in mclimate_action %}{{ all_icons["water-percent"] }}
-                                    {% elif "fan" in mclimate_action or "fan_only" in mclimate_action %}{{ all_icons.fan }}
-                                    {% elif "auto" in mclimate_action %}{{ all_icons["refresh-auto"] }}
-                                    {% elif "idle" in mclimate_action %}{{ all_icons.thermometer }}
-                                    {% else %}{{ all_icons.blank }}
+                                    {% if "off" in mclimate_action %}
+                                      {{ all_icons.blank }}
+                                    {% elif "heat_cool" in mclimate_action %}
+                                      {{ all_icons.autorenew }}
+                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}
+                                      {{ all_icons["thermometer-lines"] }}
+                                    {% elif "cooling" in mclimate_action or "cool" in mclimate_action %}
+                                      {{ all_icons.snowflake }}
+                                    {% elif "drying" in mclimate_action or "dry" in mclimate_action %}
+                                      {{ all_icons["water-percent"] }}
+                                    {% elif "fan" in mclimate_action or "fan_only" in mclimate_action %}
+                                      {{ all_icons.fan }}
+                                    {% elif "auto" in mclimate_action %}
+                                      {{ all_icons["refresh-auto"] }}
+                                    {% elif "idle" in mclimate_action %}
+                                      {{ all_icons.thermometer }}
+                                    {% else %}
+                                      {{ all_icons.blank }}
+                                    {% endif %}
+                                  climate_icon_color: >
+                                    {% if "off" in climate_action %}
+                                      {{ nextion.color.disabled }}
+                                    {% else %}
+                                      {{ nextion.color.blue_valve }}
+                                    {% endif %}
+                                  mclimate_icon_color: >
+                                    {% if "off" in mclimate_action %}
+                                      {{ nextion.color.disabled }}
+                                    {% elif "heat_cool" in mclimate_action %}
+                                      {{ nextion.color.purple }}
+                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}
+                                      {{ nextion.color.deep_oragne }}
+                                    {% elif "cooling" in mclimate_action or "cool" in mclimate_action %}
+                                      {{ nextion.color.cyan }}
+                                    {% elif "drying" in mclimate_action or "dry" in mclimate_action %}
+                                      {{ nextion.color.yellow }}
+                                    {% elif "fan" in mclimate_action or "fan_only" in mclimate_action %}
+                                      {{ nextion.color.grey_light }}
+                                    {% elif "auto" in mclimate_action %}
+                                      {{ nextion.color.green }}
+                                    {% elif "idle" in mclimate_action %}
+                                      {{ nextion.color.grey_super_light }}
+                                    {% else %}
+                                      {{ nextion.color.unknown }}
                                     {% endif %}
                               - *delay_default
                               - action: 'esphome.{{ nspanel_name }}_page_climate'
@@ -10593,7 +10629,9 @@ action:
                                   total_steps: '{{ total_steps }}'
                                   temp_offset: '{{ temp_offset }}'
                                   climate_icon: '{{ climate_icon }}'
+                                  climate_icon_c: '{{ climate_icon_color }}'
                                   mclimate_icon: '{{ mclimate_icon }}'
+                                  mclimate_icon_c: '{{ mclimate_icon_color }}'
                                   embedded_climate: '{{ climate_entity == thermostat_embedded }}'
                                   entity: '{{ "embedded_climate" if climate_entity == thermostat_embedded else climate_entity }}'
                                 continue_on_error: true

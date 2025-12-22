@@ -25,7 +25,9 @@ api:
         total_steps: int         # Total adjustment steps available, derived from the device's temperature range and step size.
         temp_offset: int         # Calibration offset applied to the temperature reading (multiplied by 10 for precision).
         climate_icon: string     # Icon codepoint representing the current climate status, chosen from HASwitchPlate Material Design Icons.
+        climate_icon_c: int[]    # RGB color array for the icon.
         mclimate_icon: string    # Icon codepoint representing the main climate status, chosen from HASwitchPlate Material Design Icons.
+        mclimate_icon_c: int[]   # RGB color array for the icon.
         embedded_climate: bool   # Indicates if climate control is integrated into the interface.
         entity: string           # Entity ID of the climate device, allowing for direct control and status updates.
       then:
@@ -60,7 +62,7 @@ api:
         - lambda: |-
             std::string set_climate_mclimate_icon;
             set_climate_mclimate_icon = mclimate_icon;
-            set_climate->execute(set_climate_mclimate_icon.c_str());
+            set_climate->execute(set_climate_mclimate_icon.c_str(), climate_icon_c, mclimate_icon_c);
 
 display:
   - id: !extend disp1
@@ -170,6 +172,8 @@ script:
     mode: restart
     parameters:
       set_climate_mclimate_icon: string
+      climate_icon_color: int[]
+      mclimate_icon_color: int[]
     then:
       - lambda: |-
           ESP_LOGV("${TAG_PAGE_CLIMATE}", "Script: set_climate");
@@ -281,6 +285,8 @@ script:
           if (current_page_id != ${PAGE_CLIMATE_ID}) return;
           disp1->set_component_text("target_icon", set_climate_climate_icon.c_str());
           disp1->set_component_text("mtarget_icon", set_climate_mclimate_icon.c_str());
+          disp1->set_component_font_color("target_icon", rgbTo565(climate_icon_color));
+          disp1->set_component_font_color("mtarget_icon", rgbTo565(mclimate_icon_color));
           disp1->show_component("target_icon");
           disp1->show_component("mtarget_icon");
           if (
