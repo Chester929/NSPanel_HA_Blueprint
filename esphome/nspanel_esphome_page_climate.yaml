@@ -59,6 +59,7 @@ api:
             set_climate_embedded_climate = embedded_climate;
         - lambda: |-
             std::string set_climate_mclimate_icon;
+            set_climate_climate_icon = climate_icon;
             set_climate_mclimate_icon = mclimate_icon;
             set_climate->execute(set_climate_mclimate_icon.c_str());
 
