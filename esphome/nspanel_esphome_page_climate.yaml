@@ -65,8 +65,8 @@ api:
             std::vector<int> set_mclimate_icon_color;
 
             set_climate_mclimate_icon = mclimate_icon;
-            set_climate_icon_color = climate_icon_c;
-            set_mclimate_icon_color = mclimate_icon_c;
+            set_climate_icon_color.assign(climate_icon_c.begin(), climate_icon_c.end());
+            set_mclimate_icon_color.assign(mclimate_icon_c.begin(), mclimate_icon_c.end());
 
             set_climate->execute(set_climate_mclimate_icon.c_str(), set_climate_icon_color, set_mclimate_icon_color);
 
