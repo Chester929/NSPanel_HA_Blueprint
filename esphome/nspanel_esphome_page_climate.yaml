@@ -68,7 +68,7 @@ api:
             set_climate_icon_color.assign(climate_icon_c.begin(), climate_icon_c.end());
             set_mclimate_icon_color.assign(mclimate_icon_c.begin(), mclimate_icon_c.end());
 
-            set_climate->execute(set_climate_mclimate_icon.c_str(), set_climate_icon_color, set_mclimate_icon_color);
+            set_climate_v2->execute(set_climate_mclimate_icon.c_str(), set_climate_icon_color, set_mclimate_icon_color);
 
 display:
   - id: !extend disp1
@@ -175,6 +175,140 @@ script:
     then:  # There's nothing here so far
 
   - id: set_climate
+    mode: restart
+    then:
+      - lambda: |-
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "Script: set_climate");
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_current_temp: %f", set_climate_current_temp);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_supported_features: %i", set_climate_supported_features);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_target_temp: %f", set_climate_target_temp);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_target_temp_high: %f", set_climate_target_temp_high);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_target_temp_low: %f", set_climate_target_temp_low);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_temp_step: %u", set_climate_temp_step);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_total_steps: %u", set_climate_total_steps);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_temp_offset: %i", set_climate_temp_offset);
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_climate_icon: %s", set_climate_climate_icon.c_str());
+          ESP_LOGV("${TAG_PAGE_CLIMATE}", "  set_climate_embedded_climate: %s", YESNO(set_climate_embedded_climate));
+
+          if (current_page_id != ${PAGE_CLIMATE_ID}) {
+            ESP_LOGW("${TAG_PAGE_CLIMATE}", "'set_climate' was called when page 'climate' is not visible");
+            return;
+          }
+          if (!is_device_ready_for_tasks()) {
+            ESP_LOGW("${TAG_PAGE_CLIMATE}", "'set_climate' was called while the device is not ready for tasks");
+            return;
+          }
+          disp1->send_command_printf("climateslider.maxval=%i", set_climate_total_steps);
+          disp1->send_command_printf("slider_high.maxval=%i", set_climate_total_steps);
+          disp1->send_command_printf("slider_low.maxval=%i", set_climate_total_steps);
+          disp1->set_component_value("temp_offset", set_climate_temp_offset);
+          disp1->set_component_value("temp_step", set_climate_temp_step);
+          const char dec_separator_str[2] = {id(mui_decimal_separator)[0], '\0'};
+          disp1->set_component_text("dec_separator", dec_separator_str);
+          disp1->show_component("current_temp");
+          char buffer[15];
+          const bool useDecimal = (set_climate_temp_step % 10 != 0);
+          feed_wdt_delay(${DELAY_SHORT});
+          if (current_page_id != ${PAGE_CLIMATE_ID}) return;
+
+          if (set_climate_current_temp > -999) {  // Current temp enabled
+            ESP_LOGV("${TAG_PAGE_CLIMATE}", "Show current temperature");
+            snprintf(buffer, sizeof(buffer), (useDecimal) ? "%.1f°" : "%.0f°", set_climate_current_temp);
+            disp1->set_component_text("current_temp",
+                                      adjustDecimalSeparator(buffer, id(mui_decimal_separator)[0]).c_str());
+          } else {
+            ESP_LOGV("${TAG_PAGE_CLIMATE}", "Show current temperature 'unavailable'");
+            disp1->set_component_text("current_temp", id(mui_unavailable).c_str());
+          }
+          feed_wdt_delay(${DELAY_SHORT});
+          if (current_page_id != ${PAGE_CLIMATE_ID}) return;
+
+          uint8_t active_slider = UINT8_MAX;
+
+          if (set_climate_target_temp > -999) {  // Target temp enabled
+            active_slider = 0;
+
+            snprintf(buffer, sizeof(buffer), (useDecimal) ? "%.1f°" : "%.0f°", set_climate_target_temp);
+            disp1->set_component_text("target_high",
+                                      adjustDecimalSeparator(buffer, id(mui_decimal_separator)[0]).c_str());
+
+            disp1->set_component_value("climateslider",
+                              round(((10*set_climate_target_temp) - set_climate_temp_offset) / set_climate_temp_step));
+
+            disp1->hide_component("slider_high");
+            disp1->hide_component("slider_low");
+            disp1->hide_component("target_low");
+
+            disp1->show_component("target_high");
+            disp1->show_component("climateslider");
+
+          } else {
+
+            disp1->hide_component("slider_high");
+
+            if (set_climate_target_temp_low > -999) {  // Target temp low enabled
+              active_slider = 2;
+
+              snprintf(buffer, sizeof(buffer), (useDecimal) ? "%.1f°" : "%.0f°", set_climate_target_temp_low);
+              disp1->set_component_text("target_low",
+                                        adjustDecimalSeparator(buffer, id(mui_decimal_separator)[0]).c_str());
+
+              disp1->set_component_value("slider_low",
+                          round(((10*set_climate_target_temp_low) - set_climate_temp_offset) / set_climate_temp_step));
+
+              disp1->show_component("target_low");
+              disp1->show_component("slider_low");
+
+            } else {
+              disp1->hide_component("target_low");
+              disp1->hide_component("slider_low");
+            }
+            feed_wdt_delay(${DELAY_SHORT});
+            if (current_page_id != ${PAGE_CLIMATE_ID}) return;
+
+            if (set_climate_target_temp_high > -999) {  // Target temp high enabled
+              active_slider = 1;
+
+              snprintf(buffer, sizeof(buffer), (useDecimal) ? "%.1f°" : "%.0f°", set_climate_target_temp_high);
+              disp1->set_component_text("target_high",
+                                        adjustDecimalSeparator(buffer, id(mui_decimal_separator)[0]).c_str());
+
+              disp1->set_component_value("slider_high",
+                        round(((10*set_climate_target_temp_high) - set_climate_temp_offset) / set_climate_temp_step));
+
+              disp1->show_component("target_high");
+              disp1->show_component("slider_high");
+            } else {
+              disp1->hide_component("target_high");
+              disp1->hide_component("slider_high");
+            }
+          }
+          feed_wdt_delay(${DELAY_SHORT});
+          if (current_page_id != ${PAGE_CLIMATE_ID}) return;
+
+          if (
+                set_climate_target_temp > -999 or       // Target temp enabled
+                set_climate_target_temp_high > -999 or  // Target temp high enabled
+                set_climate_target_temp_low > -999      // Target temp low enabled
+              ) {
+            disp1->set_component_text("target_icon", set_climate_climate_icon.c_str());
+            disp1->show_component("target_icon");
+            disp1->show_component("decrease_temp");
+            disp1->show_component("increase_temp");
+          } else {
+            disp1->hide_component("target_icon");
+            disp1->hide_component("decrease_temp");
+            disp1->hide_component("increase_temp");
+          }
+          feed_wdt_delay(${DELAY_SHORT});
+          if (current_page_id != ${PAGE_CLIMATE_ID}) return;
+
+          if (active_slider != UINT8_MAX)
+            disp1->set_component_value("active_slider", active_slider);
+
+          disp1->set_component_value("embedded", (set_climate_embedded_climate) ? 1 : 0);
+
+  - id: set_climate_v2
     mode: restart
     parameters:
       set_climate_mclimate_icon: string
@@ -314,6 +448,7 @@ script:
             disp1->set_component_value("active_slider", active_slider);
 
           disp1->set_component_value("embedded", (set_climate_embedded_climate) ? 1 : 0);
+
 
   - id: !extend stop_all
     then:
