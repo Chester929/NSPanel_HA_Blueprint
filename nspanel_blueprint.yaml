@@ -10565,7 +10565,7 @@ action:
                                   climate_action: '{{ hvac_action if hvac_action and hvac_action not in enum.states.unknown else climate_state }}'
                                   mclimate_action: '{{ mhvac_action if mhvac_action and mhvac_action not in enum.states.unknown else mclimate_state }}'
                                   climate_icon: >
-                                    {% if "off" in climate_action %}
+                                    {% if "off" in climate_action or "idle" in climate_action %}
                                       {{ all_icons["valve-closed"] }}
                                     {% else %}
                                       {{ all_icons["valve-open"] }}
