@@ -68,7 +68,7 @@ api:
             set_climate_icon_color.assign(climate_icon_c.begin(), climate_icon_c.end());
             set_mclimate_icon_color.assign(mclimate_icon_c.begin(), mclimate_icon_c.end());
 
-            set_climate->execute(set_climate_mclimate_icon.c_str(), set_climate_icon_color, set_mclimate_icon_color);
+            set_climate_v2->execute(set_climate_mclimate_icon.c_str(), set_climate_icon_color, set_mclimate_icon_color);
 
 display:
   - id: !extend disp1
@@ -174,7 +174,7 @@ script:
     mode: single
     then:  # There's nothing here so far
 
-  - id: set_climate_v2
+  - id: set_climate
     mode: restart
     then:
       - lambda: |-
@@ -308,7 +308,7 @@ script:
 
           disp1->set_component_value("embedded", (set_climate_embedded_climate) ? 1 : 0);
 
-  - id: set_climate
+  - id: set_climate_v2
     mode: restart
     parameters:
       set_climate_mclimate_icon: string
