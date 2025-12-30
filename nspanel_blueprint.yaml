@@ -10586,7 +10586,7 @@ action:
                                   mclimate_icon_color: >
                                     {% if "off" in mclimate_action %}{{ nextion.color.disabled }}
                                     {% elif "heat_cool" in mclimate_action %}{{ nextion.color.purple }}
-                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}{{ nextion.color.deep_oragne }}
+                                    {% elif "heating" in mclimate_action or "heat" in mclimate_action %}{{ nextion.color.deep_orange }}
                                     {% elif "cooling" in mclimate_action or "cool" in mclimate_action %}{{ nextion.color.cyan }}
                                     {% elif "drying" in mclimate_action or "dry" in mclimate_action %}{{ nextion.color.yellow }}
                                     {% elif "fan" in mclimate_action or "fan_only" in mclimate_action %}{{ nextion.color.grey_light }}
