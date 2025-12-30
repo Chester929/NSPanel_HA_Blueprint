@@ -10582,6 +10582,12 @@ action:
                                     {% elif "idle" in mclimate_action %}{{ all_icons.thermometer }}
                                     {% else %}{{ all_icons.blank }}
                                     {% endif %}
+                                  climate_icon_c: >
+                                    {% if "off" in climate_action or "idle" in climate_action %}
+                                      {{ nextion.color.disabled }}
+                                    {% else %}
+                                      {{ nextion.color.blue_valve }}
+                                    {% endif %}
                               - *delay_default
                               - action: 'esphome.{{ nspanel_name }}_page_climate'
                                 data:
