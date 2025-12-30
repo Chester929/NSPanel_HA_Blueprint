@@ -4842,7 +4842,6 @@ action:
           purple: [146, 107, 199]
           white: [255, 255, 255]
           yellow: [248, 248, 0]
-          #### Colors from HA Style:
           green: [76, 175, 80]
           orange: [255, 152, 0]
           cyan: [0, 188, 212]
@@ -10580,11 +10579,11 @@ action:
                                     {% elif "idle" in mclimate_action %}{{ all_icons.thermometer }}
                                     {% else %}{{ all_icons.blank }}
                                     {% endif %}
-                                  climate_icon_c: >
+                                  climate_icon_color: >
                                     {% if "off" in climate_action or "idle" in climate_action %}{{ nextion.color.disabled }}
                                     {% else %}{{ nextion.color.blue_valve }}
                                     {% endif %}
-                                  mclimate_icon_c: >
+                                  mclimate_icon_color: >
                                     {% if "off" in mclimate_action %}{{ nextion.color.disabled }}
                                     {% elif "heat_cool" in mclimate_action %}{{ nextion.color.purple }}
                                     {% elif "heating" in mclimate_action or "heat" in mclimate_action %}{{ nextion.color.deep_oragne }}
@@ -10607,9 +10606,9 @@ action:
                                   total_steps: '{{ total_steps }}'
                                   temp_offset: '{{ temp_offset }}'
                                   climate_icon: '{{ climate_icon }}'
-                                  climate_icon_c: '{{ climate_icon_c }}'
+                                  climate_icon_c: '{{ climate_icon_color }}'
                                   mclimate_icon: '{{ mclimate_icon }}'
-                                  mclimate_icon_c: '{{ climate_icon_c }}'
+                                  mclimate_icon_c: '{{ mclimate_icon_color }}'
                                   embedded_climate: '{{ climate_entity == thermostat_embedded }}'
                                   entity: '{{ "embedded_climate" if climate_entity == thermostat_embedded else climate_entity }}'
                                 continue_on_error: true
