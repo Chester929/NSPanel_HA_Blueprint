@@ -9588,7 +9588,12 @@ action:
                                 data:
                                   page: home
                                   id: chip_climate
-                                  icon: '{{ entity.icon if entity.icon is defined else "" }}'
+                                  icon: >
+                                    {{
+                                      all_icons["valve-open"]
+                                      if entity_state not in ["idle", "off"] and hvac_action in ["heating", "cooling"]
+                                      else all_icons["valve-closed"]
+                                    }}
                                   icon_color: >
                                     {{
                                       entity.icon_color
