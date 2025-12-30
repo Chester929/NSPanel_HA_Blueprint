@@ -25,7 +25,9 @@ api:
         total_steps: int         # Total adjustment steps available, derived from the device's temperature range and step size.
         temp_offset: int         # Calibration offset applied to the temperature reading (multiplied by 10 for precision).
         climate_icon: string     # Icon codepoint representing the current climate status, chosen from HASwitchPlate Material Design Icons.
+        climate_icon_c: int[]    # RGB climate icon color
         mclimate_icon: string    # Icon codepoint representing the main climate status, chosen from HASwitchPlate Material Design Icons.
+        mclimate_icon_c: int[]   # RGB mclimate icon color
         embedded_climate: bool   # Indicates if climate control is integrated into the interface.
         entity: string           # Entity ID of the climate device, allowing for direct control and status updates.
       then:
