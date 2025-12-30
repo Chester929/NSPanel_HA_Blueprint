@@ -10609,7 +10609,7 @@ action:
                                   climate_icon: '{{ climate_icon }}'
                                   climate_icon_c: '{{ climate_icon_c }}'
                                   mclimate_icon: '{{ mclimate_icon }}'
-                                  mclimate_icon_c: '{{ mclimate_icon_c }}'
+                                  mclimate_icon_c: '{{ climate_icon_c }}'
                                   embedded_climate: '{{ climate_entity == thermostat_embedded }}'
                                   entity: '{{ "embedded_climate" if climate_entity == thermostat_embedded else climate_entity }}'
                                 continue_on_error: true
