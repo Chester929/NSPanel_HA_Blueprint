@@ -49,13 +49,7 @@ api:
               return;
             }
 
-            uint8_t b_pic;
-            if (current_page_id == 12 or current_page_id == 13) {
-              b_pic = state ? 51 : 52;
-            } else {
-              b_pic = state ? 47 : 46;
-            }
-            
+            uint8_t b_pic;            
             switch (current_page_id) {
               case 12:
               case 13:
