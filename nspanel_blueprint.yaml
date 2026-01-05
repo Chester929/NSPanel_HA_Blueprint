@@ -1911,114 +1911,6 @@ blueprint:
           description: *description_ask_for_confirmation
           selector:
             boolean:
-        entity21:
-          name: Button page 3, Button 5 - Entity (Optional)
-          description: "Entity to be controlled."
-          default: []
-          selector: *button-entity-selector
-        entity21_name:
-          name: Button page 3, Button 5 - Label (Optional)
-          description: "Specify a label for this button (supports up to 10 characters)."
-          default: ""
-          selector:
-            text:
-        entity21_icon:
-          name: Button page 3, Button 5 - Icon (Optional)
-          description: *description_icon_automatic_default
-          default: []
-          selector: *selector_icon
-        entity21_icon_color:
-          name: Button page 3, Button 5 - Icon color
-          description: "Icon color which should be displayed when button is `On`."
-          default: [0, 128, 248]
-          selector: *color_selector
-        entity21_confirm:
-          name: Button page 3, Button 5 - Confirm execution of the button press
-          default: false
-          description: *description_ask_for_confirmation
-          selector:
-            boolean:
-        entity22:
-          name: Button page 3, Button 6 - Entity (Optional)
-          description: "Entity to be controlled."
-          default: []
-          selector: *button-entity-selector
-        entity22_name:
-          name: Button page 3, Button 6 - Label (Optional)
-          description: "Specify a label for this button (supports up to 10 characters)."
-          default: ""
-          selector:
-            text:
-        entity22_icon:
-          name: Button page 3, Button 6 - Icon (Optional)
-          description: *description_icon_automatic_default
-          default: []
-          selector: *selector_icon
-        entity22_icon_color:
-          name: Button page 3, Button 6 - Icon color
-          description: "Icon color which should be displayed when button is `On`."
-          default: [0, 128, 248]
-          selector: *color_selector
-        entity22_confirm:
-          name: Button page 3, Button 6 - Confirm execution of the button press
-          default: false
-          description: *description_ask_for_confirmation
-          selector:
-            boolean:
-        entity23:
-          name: Button page 3, Button 7 - Entity (Optional)
-          description: "Entity to be controlled."
-          default: []
-          selector: *button-entity-selector
-        entity23_name:
-          name: Button page 3, Button 7 - Label (Optional)
-          description: "Specify a label for this button (supports up to 10 characters)."
-          default: ""
-          selector:
-            text:
-        entity23_icon:
-          name: Button page 3, Button 7 - Icon (Optional)
-          description: *description_icon_automatic_default
-          default: []
-          selector: *selector_icon
-        entity23_icon_color:
-          name: Button page 3, Button 7 - Icon color
-          description: "Icon color which should be displayed when button is `On`."
-          default: [0, 128, 248]
-          selector: *color_selector
-        entity23_confirm:
-          name: Button page 3, Button 7 - Confirm execution of the button press
-          default: false
-          description: *description_ask_for_confirmation
-          selector:
-            boolean:
-        entity24:
-          name: Button page 3, Button 8 - Entity (Optional)
-          description: "Entity to be controlled."
-          default: []
-          selector: *button-entity-selector
-        entity24_name:
-          name: Button page 3, Button 8 - Label (Optional)
-          description: "Specify a label for this button (supports up to 10 characters)."
-          default: ""
-          selector:
-            text:
-        entity24_icon:
-          name: Button page 3, Button 8 - Icon (Optional)
-          description: *description_icon_automatic_default
-          default: []
-          selector: *selector_icon
-        entity24_icon_color:
-          name: Button page 3, Button 8 - Icon color
-          description: "Icon color which should be displayed when button is `On`."
-          default: [0, 128, 248]
-          selector: *color_selector
-        entity24_confirm:
-          name: Button page 3, Button 8 - Confirm execution of the button press
-          default: false
-          description: *description_ask_for_confirmation
-          selector:
-            boolean:
     button_page_04:
       name: Button page 04 (optional)
       icon: mdi:gesture-tap-button
@@ -3704,26 +3596,6 @@ triggers:
   ##### Button20 Sync #####
   - platform: state
     entity_id: !input "entity20"
-    id: trigger_buttonpage_state
-
-  ##### Button21 Sync #####
-  - platform: state
-    entity_id: !input "entity21"
-    id: trigger_buttonpage_state
-
-  ##### Button22 Sync #####
-  - platform: state
-    entity_id: !input "entity22"
-    id: trigger_buttonpage_state
-
-  ##### Button23 Sync #####
-  - platform: state
-    entity_id: !input "entity23"
-    id: trigger_buttonpage_state
-
-  ##### Button24 Sync #####
-  - platform: state
-    entity_id: !input "entity24"
     id: trigger_buttonpage_state
 
   ##### Button25 Sync #####
@@ -14417,34 +14289,6 @@ action:
             confirm: !input "entity20_confirm"
             page: buttonpage03
             component: button04
-          - entity: !input "entity21"
-            name: !input "entity21_name"
-            icon: !input "entity21_icon"
-            icon_color_rgb: !input "entity21_icon_color"
-            confirm: !input "entity21_confirm"
-            page: buttonpage03
-            component: button05
-          - entity: !input "entity22"
-            name: !input "entity22_name"
-            icon: !input "entity22_icon"
-            icon_color_rgb: !input "entity22_icon_color"
-            confirm: !input "entity22_confirm"
-            page: buttonpage03
-            component: button06
-          - entity: !input "entity23"
-            name: !input "entity23_name"
-            icon: !input "entity23_icon"
-            icon_color_rgb: !input "entity23_icon_color"
-            confirm: !input "entity23_confirm"
-            page: buttonpage03
-            component: button07
-          - entity: !input "entity24"
-            name: !input "entity24_name"
-            icon: !input "entity24_icon"
-            icon_color_rgb: !input "entity24_icon_color"
-            confirm: !input "entity24_confirm"
-            page: buttonpage03
-            component: button08
           - entity: !input "entity25"
             name: !input "entity25_name"
             icon: !input "entity25_icon"
