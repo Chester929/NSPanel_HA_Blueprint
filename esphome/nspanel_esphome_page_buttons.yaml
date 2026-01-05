@@ -55,6 +55,19 @@ api:
             } else {
               b_pic = state ? 47 : 46;
             }
+            
+            switch (current_page_id) {
+              case 12:
+              case 13:
+                b_pic = state ? 51 : 52;
+                break;
+              case 14:
+                b_pic = state ? 54 : 53;
+                break;
+              default:
+                b_pic = state ? 47 : 46;
+                break;
+            }
 
             disp1->set_component_picc((id + "pic").c_str(), b_pic);
             disp1->set_component_picc((id + "bri").c_str(), b_pic);
