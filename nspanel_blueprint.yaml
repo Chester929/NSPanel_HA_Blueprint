@@ -15322,15 +15322,15 @@ action:
                                 overlap:
                                   icon: "{{ repeat.item.icon }}"
                                   icon_color: >
-                                    {{
-                                      if states(repeat.item.entity) is in ["off", "unavailable", "unknown", "none", ""]
-                                        nextion.color.off
-                                      elif repeat.item.icon_color_rgb is defined and
-                                          repeat.item.icon_color_rgb is list and
-                                          repeat.item.icon_color_rgb | count == 3
-                                        repeat.item.icon_color_rgb
-                                      else nextion.color.unknown
-                                    }}
+                                    {% if states(repeat.item.entity) in ["off", "unavailable", "unknown", "none", ""] %}
+                                      {{ nextion.color.off }}
+                                    {% elif %} repeat.item.icon_color_rgb is defined and
+                                        repeat.item.icon_color_rgb is list and
+                                        repeat.item.icon_color_rgb | count == 3
+                                      repeat.item.icon_color_rgb
+                                    {% else %}
+                                      {{ nextion.color.unknown }}
+                                    {% endif %}
                             - *variable_entity
                             - *delay_boot
                             - action: "esphome.{{ nspanel_name }}_component_color"
