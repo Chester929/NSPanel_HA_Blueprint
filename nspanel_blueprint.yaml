@@ -15323,11 +15323,13 @@ action:
                                   icon: "{{ repeat.item.icon }}"
                                   icon_color: >
                                     {{
-                                      repeat.item.icon_color_rgb
-                                      if repeat.item.icon_color_rgb is defined and
+                                      if states(repeat.item.entity) is in ["off", "unavailable", "unknown", "none", ""]
+                                        nextion.color.off
+                                      elif repeat.item.icon_color_rgb is defined and
                                           repeat.item.icon_color_rgb is list and
                                           repeat.item.icon_color_rgb | count == 3
-                                      else [200, 204, 200]
+                                        repeat.item.icon_color_rgb
+                                      else nextion.color.unknown
                                     }}
                             - *variable_entity
                             - *delay_boot
