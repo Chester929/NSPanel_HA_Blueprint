@@ -1728,7 +1728,7 @@ blueprint:
         entity03:
           name: Button page 1, Button 3 - Entity (Optional)
           description: "Entity to be controlled."
-          default: [ ]
+          default: []
           selector: *button-entity-selector
         entity03_name:
           name: Button page 1, Button 3 - Label (Optional)
@@ -1739,12 +1739,12 @@ blueprint:
         entity03_icon:
           name: Button page 1, Button 3 - Icon (Optional)
           description: *description_icon_automatic_default
-          default: [ ]
+          default: []
           selector: *selector_icon
         entity03_icon_color:
           name: Button page 1, Button 3 - Icon color
           description: "Icon color which should be displayed when button is `On`."
-          default: [ 0, 128, 248 ]
+          default: [0, 128, 248]
           selector: *color_selector
         entity03_confirm:
           name: Button page 1, Button 3 - Confirm execution of the button press
@@ -1755,7 +1755,7 @@ blueprint:
         entity04:
           name: Button page 1, Button 4 - Entity (Optional)
           description: "Entity to be controlled."
-          default: [ ]
+          default: []
           selector: *button-entity-selector
         entity04_name:
           name: Button page 1, Button 4 - Label (Optional)
@@ -1766,12 +1766,12 @@ blueprint:
         entity04_icon:
           name: Button page 1, Button 4 - Icon (Optional)
           description: *description_icon_automatic_default
-          default: [ ]
+          default: []
           selector: *selector_icon
         entity04_icon_color:
           name: Button page 1, Button 4 - Icon color
           description: "Icon color which should be displayed when button is `On`."
-          default: [ 0, 128, 248 ]
+          default: [0, 128, 248]
           selector: *color_selector
         entity04_confirm:
           name: Button page 1, Button 4 - Confirm execution of the button press
