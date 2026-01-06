@@ -8172,13 +8172,13 @@ action:
                                 overlap:
                                   icon: '{{ repeat.item.icon }}'
                                   icon_color: >
-                                    {% if states(repeat.item.entity) is in ["off", "unavailable", "unknown", "none", ""] %}
-                                      {{ nextion.color.off }}
-                                    {% elif repeat.item.icon_color_rgb is defined and repeat.item.icon_color_rgb is list and repeat.item.icon_color_rgb | count == 3 %}
-                                      {{ repeat.item.icon_color_rgb }}
-                                    {% else %}
-                                      {{ nextion.color.unknown }}
-                                    {% endif %}
+                                    {{
+                                      repeat.item.icon_color_rgb
+                                      if repeat.item.icon_color_rgb is defined and
+                                          repeat.item.icon_color_rgb is list and
+                                          repeat.item.icon_color_rgb | count == 3
+                                      else [200, 204, 200]
+                                    }}
                             - *variable_entity
                             - *delay_boot
                             - action: 'esphome.{{ nspanel_name }}_component_color'
@@ -9078,13 +9078,14 @@ action:
                                         overlap:
                                           icon: '{{ repeat.item.icon if repeat.item.icon is defined and repeat.item.icon is string and repeat.item.icon.split("mdi:")[1] in all_icons else None }}'
                                           icon_color: >
-                                            {% if states(repeat.item.entity) is in ["off", "unavailable", "unknown", "none", ""] %}
-                                              {{ nextion.color.off }}
-                                            {% elif repeat.item.icon_color_rgb is defined and repeat.item.icon_color_rgb is list and repeat.item.icon_color_rgb | count == 3 %}
-                                              {{ repeat.item.icon_color_rgb }}
-                                            {% else %}
-                                              {{ nextion.color.unknown }}
-                                            {% endif %}
+                                            {{
+                                              repeat.item.icon_color_rgb
+                                              if
+                                                repeat.item.icon_color_rgb is defined and
+                                                repeat.item.icon_color_rgb is list and
+                                                repeat.item.icon_color_rgb != [200, 204, 200]
+                                              else None
+                                            }}
                                     - *variable_entity
                                     - if: '{{ entity_has_value }}'
                                       then:
@@ -9095,12 +9096,6 @@ action:
                                                 unit_of_measurement_raw
                                                 if unit_of_measurement_raw and unit_of_measurement_raw is string and unit_of_measurement_raw | length > 0
                                                 else ""
-                                              }}
-                                            text_color: >
-                                              {{ 
-                                                  repeat.item.label_color_rgb
-                                                  if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
-                                                  else [200, 204, 200]
                                               }}
                                         - if: '{{ overlap.icon is not string }}'  # Do not plot icon if it has overlap
                                           then:
@@ -9136,12 +9131,6 @@ action:
                                                 if entity_id_valid and entity_has_value
                                                 else mui[language].unavailable
                                               }}
-                                          continue_on_error: true
-                                        - action: 'esphome.{{ nspanel_name }}_component_text'
-                                          data:
-                                            page: '{{ repeat.item.page }}'
-                                            id: '{{ repeat.item.component }}'
-                                            color: '{{ text_color }}'
                                           continue_on_error: true
 
                       ## BUTTON PAGES 01 - 04 ##
