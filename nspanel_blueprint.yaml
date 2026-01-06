@@ -9109,7 +9109,7 @@ action:
                                               data:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
-                                                txt: > 
+                                                txt:
                                                   {{
                                                     entity.icon
                                                     if entity.icon != all_icons.eye
