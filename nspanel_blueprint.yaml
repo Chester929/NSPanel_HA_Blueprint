@@ -9735,14 +9735,19 @@ action:
                                                 id: '{{ repeat.item.component }}_icon'
                                                 txt: '{{ entity.icon }}'
                                               continue_on_error: true
-                                        - if: '{{ entity.icon_color != [200, 204, 200] }}'
+                                        - if: '{{ if state_attr(entity_id, "icon_color") is defined or entity.icon_color != [200, 204, 200] }}'
                                           then:
                                             - *delay_default
                                             - action: 'esphome.{{ nspanel_name }}_component_color'
                                               data:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
-                                                color: '{{ entity.icon_color }}'
+                                                color: >
+                                                  {% if state_attr(entity_id, "icon_color") is list and state_attr(entity_id, "icon_color") | count == 3  %}
+                                                    {{ state_attr(entity_id, "icon_color") }}
+                                                  {% else %}
+                                                    {{ entity.icon_color }}
+                                                  {% endif %}
                                               continue_on_error: true
 
                                         - *delay_default
