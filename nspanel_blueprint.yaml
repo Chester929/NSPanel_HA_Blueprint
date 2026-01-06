@@ -8184,12 +8184,12 @@ action:
                             - action: 'esphome.{{ nspanel_name }}_component_color'
                               data:
                                 page: home
-                                id: '{{ repeat.item.component }}'
+                                id: '{{ repeat.item.component }}_icon'
                                 color: >
-                                  {% if entity.icon_color is defined and entity.icon_color is list and entity.icon_color | count == 3 %}
-                                    {{ entity.icon_color }}
-                                  {% elif state_attr(entity_id, "icon_color") is defined and state_attr(entity_id, "icon_color") is list and state_attr(entity_id, "icon_color") | count == 3  %}
+                                  {% if state_attr(entity_id, "icon_color") is defined and state_attr(entity_id, "icon_color") is list and state_attr(entity_id, "icon_color") | count == 3  %}
                                     {{ state_attr(entity_id, "icon_color") }}
+                                  {% elif entity.icon_color is defined and entity.icon_color is list and entity.icon_color | count == 3 %}
+                                    {{ entity.icon_color }}
                                   {% else %}
                                     {{ overlap.icon_color }}
                                   {% endif %}
