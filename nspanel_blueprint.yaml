@@ -9098,9 +9098,9 @@ action:
                                               }}
                                             text_color: >
                                               {{ 
-                                                repeat.item.label_color_rgb
-                                                if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
-                                                else [200, 204, 200]
+                                                  repeat.item.label_color_rgb
+                                                  if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
+                                                  else [200, 204, 200]
                                               }}
                                         - if: '{{ overlap.icon is not string }}'  # Do not plot icon if it has overlap
                                           then:
@@ -9109,12 +9109,7 @@ action:
                                               data:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
-                                                txt:
-                                                  {{
-                                                    entity.icon
-                                                    if entity.icon != all_icons.eye
-                                                    else " "
-                                                  }}
+                                                txt: '{{ entity.icon }}'
                                               continue_on_error: true
                                         - if: '{{ state_attr(entity_id, "icon_color") is defined or entity.icon_color != [200, 204, 200] }}'
                                           then:
