@@ -9097,7 +9097,7 @@ action:
                                                 else ""
                                               }}
                                             text_color: >
-                                              {{
+                                              {{ 
                                                 repeat.item.label_color_rgb
                                                 if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
                                                 else [200, 204, 200]
@@ -9109,7 +9109,7 @@ action:
                                               data:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
-                                                txt: >
+                                                txt: > 
                                                   {% if entity.icon != all_icons.eye %}
                                                     {{ entity.icon }}
                                                   {% else %}
