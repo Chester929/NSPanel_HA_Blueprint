@@ -9721,6 +9721,12 @@ action:
                                                 if unit_of_measurement_raw and unit_of_measurement_raw is string and unit_of_measurement_raw | length > 0
                                                 else ""
                                               }}
+                                            text_color: >
+                                              {{ 
+                                                  repeat.item.label_color_rgb
+                                                  if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
+                                                  else [200, 204, 200]
+                                              }}
                                         - if: '{{ overlap.icon is not string }}'  # Do not plot icon if it has overlap
                                           then:
                                             - *delay_default
@@ -9755,6 +9761,12 @@ action:
                                                 if entity_id_valid and entity_has_value
                                                 else mui[language].unavailable
                                               }}
+                                          continue_on_error: true
+                                        - action: 'esphome.{{ nspanel_name }}_component_text'
+                                          data:
+                                            page: '{{ repeat.item.page }}'
+                                            id: '{{ repeat.item.component }}'
+                                            color: '{{ text_color }}'
                                           continue_on_error: true
 
                       ## BUTTON PAGES 01 - 04 ##
