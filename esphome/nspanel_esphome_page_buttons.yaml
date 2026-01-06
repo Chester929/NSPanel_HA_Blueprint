@@ -50,10 +50,17 @@ api:
             }
 
             uint8_t b_pic;
-            if (current_page_id == 12 or current_page_id == 13) {
-              b_pic = state ? 51 : 52;
-            } else {
-              b_pic = state ? 47 : 46;
+            switch (current_page_id) {
+              case 12:
+                b_pic = state ? 54 : 53;
+                break;
+              case 13:
+              case 14:
+                b_pic = state ? 51 : 52;
+                break;
+              default:
+                b_pic = state ? 47 : 46;
+                break;
             }
 
             disp1->set_component_picc((id + "pic").c_str(), b_pic);
