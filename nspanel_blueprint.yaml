@@ -9110,11 +9110,11 @@ action:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
                                                 txt: > 
-                                                  {{
-                                                    entity.icon
-                                                    if entity.icon != all_icons.eye
-                                                    else " "
-                                                  }}
+                                                  {% if entity.icon != all_icons.eye %}
+                                                    {{ entity.icon }}
+                                                  {% else %}
+                                                    {{ " " }}
+                                                  {% endif %}
                                               continue_on_error: true
                                         - if: '{{ state_attr(entity_id, "icon_color") is defined or entity.icon_color != [200, 204, 200] }}'
                                           then:
