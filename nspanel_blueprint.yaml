@@ -9702,14 +9702,13 @@ action:
                                         overlap:
                                           icon: '{{ repeat.item.icon if repeat.item.icon is defined and repeat.item.icon is string and repeat.item.icon.split("mdi:")[1] in all_icons else None }}'
                                           icon_color: >
-                                            {{
-                                              repeat.item.icon_color_rgb
-                                              if
-                                                repeat.item.icon_color_rgb is defined and
-                                                repeat.item.icon_color_rgb is list and
-                                                repeat.item.icon_color_rgb != [200, 204, 200]
-                                              else None
-                                            }}
+                                            {% if states(repeat.item.entity) is in ["off", "unavailable", "unknown", "none", ""] %}
+                                              {{ nextion.color.off }}
+                                            {% elif repeat.item.icon_color_rgb is defined and repeat.item.icon_color_rgb is list and repeat.item.icon_color_rgb | count == 3 %}
+                                              {{ repeat.item.icon_color_rgb }}
+                                            {% else %}
+                                              {{ nextion.color.unknown }}
+                                            {% endif %}
                                     - *variable_entity
                                     - if: '{{ entity_has_value }}'
                                       then:
@@ -9723,9 +9722,9 @@ action:
                                               }}
                                             text_color: >
                                               {{ 
-                                                  repeat.item.label_color_rgb
-                                                  if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
-                                                  else [200, 204, 200]
+                                                repeat.item.label_color_rgb
+                                                if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
+                                                else [200, 204, 200]
                                               }}
                                         - if: '{{ overlap.icon is not string }}'  # Do not plot icon if it has overlap
                                           then:
