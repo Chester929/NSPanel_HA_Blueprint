@@ -9762,7 +9762,7 @@ action:
                                                 else mui[language].unavailable
                                               }}
                                           continue_on_error: true
-                                        - action: 'esphome.{{ nspanel_name }}_component_text'
+                                        - action: 'esphome.{{ nspanel_name }}_component_color'
                                           data:
                                             page: '{{ repeat.item.page }}'
                                             id: '{{ repeat.item.component }}'
