@@ -104,7 +104,7 @@ script:
             ESP_LOGW("${TAG_UPLOAD_TFT}", "TFT upload in progress");
           ESP_LOGCONFIG("${TAG_UPLOAD_TFT}", "Add-on Upload TFT:");
           #if ESPHOME_VERSION_CODE >= VERSION_CODE(2025, 11, 0)  // Code for ESPHome newer than v2025.11.0
-          ESP_LOGCONFIG("${TAG_UPLOAD_TFT}", "  File model: %s", tft_file_model->current_option());
+          ESP_LOGCONFIG("${TAG_UPLOAD_TFT}", "  File model: %s", tft_file_model->current_option().c_str());
           #else
           ESP_LOGCONFIG("${TAG_UPLOAD_TFT}", "  File model: %s", tft_file_model->state.c_str());
           #endif
