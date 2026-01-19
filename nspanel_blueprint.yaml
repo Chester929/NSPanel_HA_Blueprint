@@ -8209,7 +8209,7 @@ action:
           lock:
             "on": ["unlocked"]
             "off": ["locked"]
-      # yamllint enable rule:truthy rule:line-length rule:comments-indentation
+            # yamllint enable rule:truthy rule:line-length rule:comments-indentation
 
   - if: '{{ false }}'  #### Global anchor repository ####
     then:
@@ -9721,7 +9721,7 @@ action:
                                                 else ""
                                               }}
                                             text_color: >
-                                              {{ 
+                                              {{
                                                 repeat.item.label_color_rgb
                                                 if repeat.item.label_color_rgb is defined and repeat.item.label_color_rgb is list and repeat.item.label_color_rgb | count == 3
                                                 else [200, 204, 200]
@@ -9733,7 +9733,7 @@ action:
                                               data:
                                                 page: '{{ repeat.item.page }}'
                                                 id: '{{ repeat.item.component }}_icon'
-                                                txt: > 
+                                                txt: >
                                                   {% if entity.icon != all_icons.eye %}
                                                     {{ entity.icon }}
                                                   {% else %}
@@ -11943,7 +11943,7 @@ action:
 
                                 Troubleshooting steps and more information are available in the online documentation: [Panel startup issues - Blueprint is not detected](https://github.com/Blackymas/NSPanel_HA_Blueprint/blob/main/docs/error_initializing.md#blueprint-is-not-detected).
                             continue_on_error: true
-                      # yamllint enable rule:line-length
+                            # yamllint enable rule:line-length
 
               ##### Other events #####
               - alias: Other events

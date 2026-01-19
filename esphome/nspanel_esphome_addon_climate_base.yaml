@@ -284,7 +284,8 @@ script:
 
           // Execute set_climate
           ESP_LOGV("${TAG_ADDON_CLIMATE}", "Call set_climate");
-          set_climate->execute();
+          std::vector<int> empty_color = {};
+          set_climate->execute("", empty_color, empty_color);
 
           // Update target temp icon
           ESP_LOGV("${TAG_ADDON_CLIMATE}", "Call update_climate_icon");
