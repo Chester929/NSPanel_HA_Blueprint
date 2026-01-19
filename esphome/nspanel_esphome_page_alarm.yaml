@@ -204,7 +204,7 @@ script:
 
           // Create action request
           esphome::api::HomeassistantActionRequest action_request;
-          action_request.set_service(esphome::StringRef(action_str.c_str()));
+          action_request.set_service(esphome::StringRef(action_str));
           ESP_LOGV("${TAG_PAGE_ALARM}", "Service set");
 
           const bool has_code = !pin.empty();
