@@ -204,7 +204,7 @@ script:
 
           // Create action request
           esphome::api::HomeassistantActionRequest action_request;
-          action_request.set_service(action_str);
+          action_request.set_service(esphome::StringRef(action_str));
           ESP_LOGV("${TAG_PAGE_ALARM}", "Service set");
 
           const bool has_code = !pin.empty();
@@ -212,15 +212,15 @@ script:
           // Add entity_id
           {
             auto &kv = action_request.data.emplace_back();
-            kv.set_key("entity_id");
-            kv.set_value(entity);
+            kv.set_key(esphome::StringRef("entity_id"));
+            kv.set_value_ref(esphome::StringRef(entity));
           }
 
           // Add code if present
           if (has_code) {
             auto &kv = action_request.data.emplace_back();
-            kv.set_key("code");
-            kv.set_value(pin);
+            kv.set_key(esphome::StringRef("code"));
+            kv.set_value_ref(esphome::StringRef(pin));
           }  // if (has_code)
 
           ESP_LOGV("${TAG_PAGE_ALARM}", "Final data size: %zu", action_request.data.size());
