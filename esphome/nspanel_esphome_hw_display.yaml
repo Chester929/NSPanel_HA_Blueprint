@@ -59,7 +59,11 @@ display:
       then:
         - lambda: |-
             current_page_id = ${PAGE_BOOT_ID};
+            #if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)  // ESPHome v2026.1.0+
+            wakeup_page_id = get_page_id(wakeup_page_name->current_option().c_str());
+            #else  // ESPHome < v2026.1.0
             wakeup_page_id = get_page_id(wakeup_page_name->current_option());
+            #endif  // ESPHOME_VERSION_CODE
         - script.stop: wait_for_display
         - lambda: |-
             ESP_LOGI("${TAG_HW_DISPLAY}", "Nextion setup triggered");
