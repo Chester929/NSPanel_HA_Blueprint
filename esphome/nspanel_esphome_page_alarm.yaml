@@ -207,7 +207,7 @@ script:
           #if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)  // ESPHome v2026.1.0+
           action_request.service = esphome::StringRef(action_str);
           #else  // ESPHome < v2026.1.0
-          action_request.set_service(action_str);
+          action_request.set_service(esphome::StringRef(action_str));
           #endif  // ESPHOME_VERSION_CODE
           ESP_LOGV("${TAG_PAGE_ALARM}", "Service set");
 
@@ -220,8 +220,8 @@ script:
             kv.key = esphome::StringRef("entity_id");
             kv.value = esphome::StringRef(entity);
             #else  // ESPHome < v2026.1.0
-            kv.set_key("entity_id");
-            kv.set_value(entity);
+            kv.set_key(esphome::StringRef("entity_id"));
+            kv.value = entity;
             #endif  // ESPHOME_VERSION_CODE
           }
 
@@ -232,8 +232,8 @@ script:
             kv.key = esphome::StringRef("code");
             kv.value = esphome::StringRef(pin);
             #else  // ESPHome < v2026.1.0
-            kv.set_key("code");
-            kv.set_value(pin);
+            kv.set_key(esphome::StringRef("code"));
+            kv.value = pin;
             #endif  // ESPHOME_VERSION_CODE
           }  // if (has_code)
 
