@@ -128,10 +128,12 @@ api:
             ESP_LOGV("${TAG_PAGE_ALARM}", "Page header");
             update_alarm_icon->execute("icon_state", state.c_str());  // Icon
             // Page header - Title
-            if (page_title.find("\\r") != std::string::npos) {
-              page_title = page_title.replace(page_title.find("\\r"), 2, " ");
+            std::string title_str(page_title.c_str());
+            auto pos = title_str.find("\\r");
+            if (pos != std::string::npos) {
+              title_str.replace(pos, 2, " ");
             }
-            disp1->set_component_text("page_label", page_title.c_str());  // Title
+            disp1->set_component_text("page_label", title_str.c_str());  // Title
 
             ESP_LOGV("${TAG_PAGE_ALARM}", "Done!");
 

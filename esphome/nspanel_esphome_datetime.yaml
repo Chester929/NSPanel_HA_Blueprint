@@ -119,7 +119,7 @@ script:
     then:
       - lambda: |-
           if (id(mui_timezone).empty()) {
-            ESP_LOGD("${TAG_DATETIME}", "Current timezone: %s", time_provider->get_timezone().c_str());
+            ESP_LOGD("${TAG_DATETIME}", "No custom timezone set, using default");
             return;
           }
           ESP_LOGI("${TAG_DATETIME}", "Setting timezone: %s", id(mui_timezone).c_str());
@@ -154,6 +154,6 @@ time:  # Keeps time display updated
       then:
         - lambda: |-
             ESP_LOGD("${TAG_DATETIME}", "System clock synchronized");
-            ESP_LOGD("${TAG_DATETIME}", "Timezone: %s", time_provider->get_timezone().c_str());
+            ESP_LOGD("${TAG_DATETIME}", "Timezone: %s", id(mui_timezone).empty() ? "default" : id(mui_timezone).c_str());
             refresh_datetime->execute();
 ...
