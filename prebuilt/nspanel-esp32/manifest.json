@@ -11,12 +11,12 @@
     }
   ],
   "name": "NSPanel HA Blueprint",
-  "version": "4.3.12",
+  "version": "4.3.13",
   "builds": {
     "chipFamily": "ESP32",
     "ota": {
       "path": "https://raw.githubusercontent.com/Blackymas/NSPanel_HA_Blueprint/main/prebuilt/nspanel_esphome_prebuilt.bin",
-      "release_url": "https://github.com/Blackymas/NSPanel_HA_Blueprint/releases/tag/v4.3.12"
+      "release_url": "https://github.com/Blackymas/NSPanel_HA_Blueprint/releases/tag/v4.3.13"
     }
   }
 }
